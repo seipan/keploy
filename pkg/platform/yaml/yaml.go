@@ -263,7 +263,6 @@ func (ys *Yaml) ReadTestcase(path string, lastSeenId platform.KindSpecifier, opt
 	if err != nil {
 		return nil, err
 	}
-
 	tcs := []*models.TestCase{}
 
 	_, err = os.Stat(path)
