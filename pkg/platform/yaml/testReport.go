@@ -54,8 +54,12 @@ func (fe *TestReport) GetResults(runId string) ([]platform.KindSpecifier, error)
 }
 
 func (fe *TestReport) Read(ctx context.Context, path, name string) (platform.KindSpecifier, error) {
+	testpath, err := util.ValidatePath(filepath.Join(path, name+".yaml"))
+	if err != nil {
+		return nil, err
+	}
 
-	file, err := os.OpenFile(filepath.Join(path, name+".yaml"), os.O_RDONLY, os.ModePerm)
+	file, err := os.OpenFile(testpath, os.O_RDONLY, os.ModePerm)
 	if err != nil {
 		return &models.TestReport{}, err
 	}
